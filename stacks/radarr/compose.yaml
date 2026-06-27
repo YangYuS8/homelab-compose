@@ -1,0 +1,27 @@
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    labels:
+      dev.nesoriel.update.policy: "notify"
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      TZ: ${TZ:-Asia/Shanghai}
+    volumes:
+      - /data/docker/config/radarr:/config
+
+      # Movie library
+      - /data/media/movie:/data/media/movie
+
+      # Shared download workspace
+      - /data/downloads:/data/downloads
+    ports:
+      - "${RADARR_PORT:-7878}:7878"
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true
