@@ -1,7 +1,7 @@
 komga:
   baseUri: http://komga:25600
-  komgaUser:
-  komgaPassword:
+  komgaUser: "CHANGE_ME"
+  komgaPassword: "CHANGE_ME"
   eventListener:
     enabled: false
     metadataLibraryFilter: []
