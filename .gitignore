@@ -28,3 +28,23 @@ hosts/**/raw-stacks/
 !.env.example
 secrets/
 *.secret
+
+# Private/local snapshots
+private/
+_private/
+local/
+raw/
+raw-stacks/
+hosts/**/raw-stacks/
+*.raw.yml
+*.raw.yaml
+*.local.yml
+*.local.yaml
+*.bak
+
+# Secrets and real env files
+.env
+*.env
+!.env.example
+secrets/
+*.secret
