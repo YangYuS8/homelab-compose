@@ -1,0 +1,37 @@
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+
+      # Opt-in mode:
+      # Only update containers with:
+      # com.centurylinklabs.watchtower.enable=true
+      WATCHTOWER_LABEL_ENABLE: "true"
+
+      # Remove old images after successful updates.
+      WATCHTOWER_CLEANUP: "true"
+
+      # Do not update stopped containers.
+      WATCHTOWER_INCLUDE_STOPPED: "false"
+
+      # Do not restart stopped containers.
+      WATCHTOWER_REVIVE_STOPPED: "false"
+
+      # Check once per day at 04:30 local time.
+      WATCHTOWER_SCHEDULE: ${WATCHTOWER_SCHEDULE:-0 30 4 * * *}
+
+      # Keep logs readable.
+      WATCHTOWER_LOG_LEVEL: ${WATCHTOWER_LOG_LEVEL:-info}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true
