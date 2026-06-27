@@ -1,0 +1,27 @@
+services:
+  komf:
+    image: sndxr/komf:latest
+    container_name: komf
+    restart: unless-stopped
+    labels:
+      dev.nesoriel.update.policy: "notify"
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+
+      # Komga is in the same Docker network, so use service/container name.
+      KOMF_KOMGA_BASE_URI: ${KOMF_KOMGA_BASE_URI:-http://komga:25600}
+
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1,192.168.3.0/24,komga}
+    volumes:
+      - /data/docker/config/komf:/config
+      - /data/media/manga:/data
+    ports:
+      - "${KOMF_PORT:-8085}:8085"
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true
