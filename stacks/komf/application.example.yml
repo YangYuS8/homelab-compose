@@ -34,8 +34,8 @@ komga:
         originalPublisherTagName:
 
 kavita:
-  baseUri:
-  apiKey:
+  baseUri: "http://unused-kavita:5000"
+  apiKey: "CHANGE_ME_UNUSED"
   eventListener:
     enabled: false
     metadataLibraryFilter: []
