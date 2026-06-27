@@ -3,6 +3,8 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     restart: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
     environment:
       PUID: ${PUID:-1000}
       PGID: ${PGID:-1000}

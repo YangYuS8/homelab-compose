@@ -3,6 +3,8 @@ services:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
     restart: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
     privileged: true
     shm_size: "2gb"
     environment:
