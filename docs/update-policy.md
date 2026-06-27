@@ -1,35 +1,61 @@
 # Container Update Policy
 
-This homelab uses a tiered container update strategy.
+This homelab uses a conservative container update strategy.
+
+## Current decision
+
+Do not deploy an unattended container auto-updater for now.
+
+The previously considered Watchtower project is no longer suitable as a core component because its original upstream has been archived. Update automation should not depend on an unmaintained project.
 
 ## Principles
 
-- Do not blindly auto-update every container.
-- Low-risk stateless services may be auto-updated.
-- Stateful or critical services should be reviewed before updating.
-- Git remains the source of truth for Compose definitions.
+- Git is the source of truth.
+- Docker Compose remains the native runtime format.
 - Runtime `.env` files and secrets must not be committed.
-- Every stack should remain runnable with plain `docker compose up -d`.
+- Do not blindly auto-update every container.
+- Critical services must be updated manually.
+- Update checks and update execution should be separated.
+- Future automation should support backup, health check, rollback, and manual approval.
 
-## Update classes
+## Update policy labels
 
-### Class A: Auto-update allowed
+Stacks may use a neutral metadata label:
+
+```yaml
+labels:
+  dev.nesoriel.update.policy: "manual"
+```
+
+Possible values:
+
+```text
+auto    - May be auto-updated in the future if backup, health check, and rollback are implemented.
+notify  - Should only notify about available updates.
+manual  - Must be manually reviewed and updated.
+```
+
+These labels are metadata for future tooling. They are not tied to Watchtower or any specific updater.
+
+## Recommended service classes
+
+### Class A: Auto-update candidates
 
 Low-risk, stateless, or easily rebuildable services.
 
 Examples:
 
 - flaresolverr
-- simple dashboard services
 - small helper services
+- temporary utility services
 
 Policy:
 
-- `latest` tag is acceptable.
-- Watchtower auto-update is allowed.
-- Service should have simple logs and easy rollback.
+- May use `latest`.
+- May use `dev.nesoriel.update.policy: "auto"`.
+- Future platform may update them after health checks.
 
-### Class B: Notify or manual update preferred
+### Class B: Notify-first services
 
 Services with local configuration databases, but not core infrastructure.
 
@@ -47,11 +73,11 @@ Examples:
 
 Policy:
 
-- `latest` or stable channel tags may be used.
 - Prefer update notification first.
 - Manual review is recommended before applying updates.
+- Back up config before major upgrades.
 
-### Class C: Manual update only
+### Class C: Manual-update services
 
 Critical, stateful, or infrastructure-level services.
 
@@ -71,55 +97,29 @@ Policy:
 
 - Do not auto-update unattended.
 - Read release notes before updating.
-- Backup config and data before major upgrades.
+- Back up config and data before major upgrades.
 - Prefer maintenance windows.
 
-## Image tag guidance
+## Future options
 
-### Acceptable for low-risk services
+Possible future update-checking approaches:
 
-```yaml
-image: example/service:latest
+- Renovate: update Compose image references through Git pull requests.
+- Diun: notify when container images have new tags or digest changes.
+- WUD: monitor container image updates and expose them through UI/notifications.
+- Custom Nesoriel platform: implement update detection, approval, deployment, backup, health checks, and rollback.
+
+## Current operational rule
+
+For now, updates are manual.
+
+The standard manual update flow is:
+
+```bash
+cd /data/compose/stacks/<stack-name>
+docker compose pull
+docker compose up -d
+docker compose logs --tail=100
 ```
 
-### Better for critical services
-
-```yaml
-image: example/service:1.2
-```
-
-or:
-
-```yaml
-image: example/service:1.2.3
-```
-
-### Most reproducible
-
-```yaml
-image: example/service@sha256:<digest>
-```
-
-Digest pinning provides the strongest reproducibility, but is more difficult to maintain manually.
-
-## Watchtower labels
-
-Auto-update allowed:
-
-```yaml
-labels:
-  com.centurylinklabs.watchtower.enable: "true"
-```
-
-Manual or protected service:
-
-```yaml
-labels:
-  com.centurylinklabs.watchtower.enable: "false"
-```
-
-## Current recommendation
-
-Start with opt-in auto-updates only.
-
-Do not allow Watchtower to update every running container by default.
+For critical services, back up the relevant config/data directories before updating.

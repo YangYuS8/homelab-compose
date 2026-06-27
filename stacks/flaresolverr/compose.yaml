@@ -4,7 +4,7 @@ services:
     container_name: flaresolverr
     restart: unless-stopped
     labels:
-      com.centurylinklabs.watchtower.enable: "true"
+      dev.nesoriel.update.policy: "auto"
     privileged: true
     shm_size: "2gb"
     environment:

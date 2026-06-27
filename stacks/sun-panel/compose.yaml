@@ -4,7 +4,7 @@ services:
     container_name: sun-panel
     restart: unless-stopped
     labels:
-      com.centurylinklabs.watchtower.enable: "false"
+      dev.nesoriel.update.policy: "manual"
     user: root
     privileged: true
     environment:
