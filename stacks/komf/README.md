@@ -52,3 +52,19 @@ docker compose up -d
 ```
 
 Dockge is only a visual management panel, not the source of truth.
+
+## Required application.yml
+
+Komf requires an application config file:
+
+```text
+/config/application.yml
+```
+
+On the runtime host, create it from the example:
+
+```bash
+cp /data/compose/repo/homelab-compose/stacks/komf/application.example.yml /data/docker/config/komf/application.yml
+```
+
+Real credentials should not be written into the public repository. Runtime credentials should be stored in the local `.env` file.

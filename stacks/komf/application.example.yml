@@ -1,0 +1,116 @@
+komga:
+  baseUri: http://komga:25600
+  komgaUser:
+  komgaPassword:
+  eventListener:
+    enabled: false
+    metadataLibraryFilter: []
+    metadataSeriesExcludeFilter: []
+    notificationsLibraryFilter: []
+  metadataUpdate:
+    default:
+      libraryType: "MANGA"
+      updateModes: [API]
+      aggregate: false
+      mergeTags: false
+      mergeGenres: false
+      bookCovers: false
+      seriesCovers: false
+      overrideExistingCovers: true
+      overrideComicInfo: false
+      postProcessing:
+        seriesTitle: false
+        seriesTitleLanguage: "en"
+        fallbackToAltTitle: false
+        alternativeSeriesTitles: false
+        alternativeSeriesTitleLanguages:
+          - "en"
+          - "ja"
+          - "ja-ro"
+        orderBooks: false
+        scoreTagName: "score"
+        readingDirectionValue:
+        languageValue:
+        originalPublisherTagName:
+
+kavita:
+  baseUri:
+  apiKey:
+  eventListener:
+    enabled: false
+    metadataLibraryFilter: []
+    metadataSeriesExcludeFilter: []
+    notificationsLibraryFilter: []
+
+notifications:
+  templatesDirectory: "./"
+  discord:
+    webhooks:
+    seriesCover: false
+    embedColor: "1F8B4C"
+  apprise:
+    urls:
+    seriesCover: false
+
+database:
+  file: /config/database.sqlite
+
+metadataProviders:
+  malClientId:
+  comicVineApiKey:
+  comicVineSearchLimit:
+  comicVineIssueName:
+  comicVineIdFormat:
+  bangumiToken:
+  defaultProviders:
+    mangaUpdates:
+      priority: 10
+      enabled: true
+      mediaType: "MANGA"
+      authorRoles: ["WRITER"]
+      artistRoles: ["PENCILLER", "INKER", "COLORIST", "LETTERER", "COVER"]
+    mal:
+      priority: 20
+      enabled: false
+      mediaType: "MANGA"
+    nautiljon:
+      priority: 30
+      enabled: false
+    aniList:
+      priority: 40
+      enabled: false
+      mediaType: "MANGA"
+      tagsScoreThreshold: 60
+      tagsSizeLimit: 15
+    yenPress:
+      priority: 50
+      enabled: false
+      mediaType: "MANGA"
+    kodansha:
+      priority: 60
+      enabled: false
+    viz:
+      priority: 70
+      enabled: false
+    bookWalker:
+      priority: 80
+      enabled: false
+      mediaType: "MANGA"
+    mangaDex:
+      priority: 90
+      enabled: false
+      coverLanguages:
+        - "en"
+        - "ja"
+    bangumi:
+      priority: 100
+      enabled: false
+    comicVine:
+      priority: 110
+      enabled: false
+    hentag:
+      priority: 120
+      enabled: false
+    webtoons:
+      priority: 130
+      enabled: false

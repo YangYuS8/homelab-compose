@@ -10,6 +10,8 @@ services:
 
       # Komga is in the same Docker network, so use service/container name.
       KOMF_KOMGA_BASE_URI: ${KOMF_KOMGA_BASE_URI:-http://komga:25600}
+      KOMF_KOMGA_USER: ${KOMF_KOMGA_USER:-}
+      KOMF_KOMGA_PASSWORD: ${KOMF_KOMGA_PASSWORD:-}
 
       HTTP_PROXY: ${HTTP_PROXY:-}
       HTTPS_PROXY: ${HTTPS_PROXY:-}
