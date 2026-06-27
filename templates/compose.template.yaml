@@ -1,0 +1,16 @@
+networks:
+  default:
+    name: homelab
+    external: true
+
+services:
+  app:
+    image: example/image:latest
+    container_name: example
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - /data/docker/config/example:/config
+    ports:
+      - "${APP_PORT}:8080"
