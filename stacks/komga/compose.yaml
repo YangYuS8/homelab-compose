@@ -1,0 +1,21 @@
+services:
+  komga:
+    image: gotson/komga:latest
+    container_name: komga
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    labels:
+      dev.nesoriel.update.policy: "notify"
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+    volumes:
+      - /data/docker/config/komga:/config
+      - /data/media/manga:/data
+    ports:
+      - "${KOMGA_PORT:-25600}:25600"
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true
