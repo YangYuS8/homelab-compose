@@ -1,0 +1,21 @@
+services:
+  glance:
+    image: ${GLANCE_IMAGE:-glanceapp/glance:latest}
+    container_name: glance
+    restart: unless-stopped
+    labels:
+      dev.nesoriel.update.policy: "notify"
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+    volumes:
+      - /data/docker/config/glance:/app/config:ro
+      - /data/docker/config/glance/assets:/app/assets:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "${GLANCE_PORT:-3003}:8080"
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true
