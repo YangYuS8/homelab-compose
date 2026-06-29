@@ -89,3 +89,25 @@ http://radarr:7878
 http://prowlarr:9696
 ```
 
+
+## Peer management workflow
+
+```text
+ANI-RSS / Radarr / manual downloads
+  -> qBittorrent
+  -> PeerBanHelper observes and manages peers
+```
+
+PeerBanHelper runs with host networking, so it should connect to qBittorrent through the host-published WebUI/API port:
+
+```text
+http://127.0.0.1:8080
+```
+
+Do not use Docker service name here:
+
+```text
+http://qbittorrent:8080
+```
+
+qBittorrent currently remains in Docker bridge mode. Do not change qBittorrent networking unless PeerBanHelper actually reports peer detection issues.
