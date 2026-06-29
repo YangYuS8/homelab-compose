@@ -41,3 +41,10 @@ IP:
 - Runtime `.env` files are local-only and must not be committed.
 - Dockge is only a visual management layer.
 - Services should remain runnable through plain Docker Compose.
+
+## Peer management
+
+| Service | URL | Role | Update Policy |
+|---|---|---|---|
+| PeerBanHelper | http://192.168.3.30:9898 | qBittorrent peer management and anti-leech helper | manual |
+
