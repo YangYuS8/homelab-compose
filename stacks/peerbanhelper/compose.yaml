@@ -1,0 +1,11 @@
+services:
+  peerbanhelper:
+    image: ${PBH_IMAGE:-registry.cn-hangzhou.aliyuncs.com/ghostchu/peerbanhelper:latest}
+    container_name: peerbanhelper
+    restart: unless-stopped
+    network_mode: host
+    stop_grace_period: 30s
+    labels:
+      dev.nesoriel.update.policy: "manual"
+    volumes:
+      - /data/docker/config/peerbanhelper:/app/data
