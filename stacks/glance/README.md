@@ -1,6 +1,15 @@
 # Glance
 
-Glance is the homelab start page and navigation dashboard.
+Glance is the homelab start page.
+
+It is used for:
+
+- Service bookmarks
+- Health checks
+- Technical RSS feeds
+- Release tracking
+- Repository overview
+- Search shortcuts
 
 It replaces Sun Panel. Sun Panel is no longer part of this homelab stack.
 
@@ -44,15 +53,9 @@ cp stacks/glance/assets/user.css /data/docker/config/glance/assets/user.css
 
 ## Docker socket
 
-This stack mounts Docker socket read-only:
+This stack does not mount `/var/run/docker.sock`.
 
-```text
-/var/run/docker.sock:/var/run/docker.sock:ro
-```
-
-This is required for the Glance Docker containers widget.
-
-Do not expose Glance directly to the public internet.
+Container state should be managed through Dockge, Docker CLI, or a future dedicated monitoring stack.
 
 ## Update policy
 
