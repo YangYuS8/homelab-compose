@@ -11,6 +11,7 @@ services:
       - /data/docker/config/glance:/app/config:ro
       - /data/docker/config/glance/assets:/app/assets:ro
       - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - "${GLANCE_PORT:-3003}:8080"
     networks:

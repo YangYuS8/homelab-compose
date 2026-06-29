@@ -41,7 +41,6 @@ IP:
 - Runtime `.env` files are local-only and must not be committed.
 - Dockge is only a visual management layer.
 - Services should remain runnable through plain Docker Compose.
-- Sun Panel is deprecated as the long-term dashboard; keep its stack only for rollback until Glance is verified.
 
 ## Peer management
 

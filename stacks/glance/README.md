@@ -1,8 +1,8 @@
 # Glance
 
-Glance is used as the homelab start page and navigation dashboard.
+Glance is the homelab start page and navigation dashboard.
 
-It replaces Sun Panel as the preferred long-term dashboard.
+It replaces Sun Panel. Sun Panel is no longer part of this homelab stack.
 
 ## Runtime host
 
@@ -37,18 +37,22 @@ Glance also needs YAML config files, so copy them manually:
 
 ```bash
 mkdir -p /data/docker/config/glance/assets
-cp -n stacks/glance/config/glance.yml /data/docker/config/glance/glance.yml
-cp -n stacks/glance/config/home.yml /data/docker/config/glance/home.yml
-cp -n stacks/glance/assets/user.css /data/docker/config/glance/assets/user.css
+cp stacks/glance/config/glance.yml /data/docker/config/glance/glance.yml
+cp stacks/glance/config/home.yml /data/docker/config/glance/home.yml
+cp stacks/glance/assets/user.css /data/docker/config/glance/assets/user.css
 ```
-
-Use `cp` without `-n` only when you intentionally want to overwrite runtime config.
 
 ## Docker socket
 
-This stack intentionally does not mount `/var/run/docker.sock`.
+This stack mounts Docker socket read-only:
 
-Glance supports Docker container widgets, but Docker socket access should be reviewed separately, preferably through a restricted socket proxy.
+```text
+/var/run/docker.sock:/var/run/docker.sock:ro
+```
+
+This is required for the Glance Docker containers widget.
+
+Do not expose Glance directly to the public internet.
 
 ## Update policy
 
@@ -56,5 +60,3 @@ Glance supports Docker container widgets, but Docker socket access should be rev
 labels:
   dev.nesoriel.update.policy: "notify"
 ```
-
-Glance is a dashboard and is not on the critical media data path, so notify is acceptable.
