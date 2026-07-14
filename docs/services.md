@@ -48,3 +48,12 @@ IP:
 |---|---|---|---|
 | PeerBanHelper | http://192.168.3.30:9898 | qBittorrent peer management and anti-leech helper | manual |
 
+
+### PeerBanHelper 验证状态
+
+- Web 服务：正常
+- qBittorrent 下载器连接：正常
+- 真实 Torrent 和 Peer 数据读取验证通过
+- 网络模式：host
+- qBittorrent 地址：`http://127.0.0.1:8080`
+- 更新策略：manual

@@ -111,3 +111,18 @@ http://qbittorrent:8080
 ```
 
 qBittorrent currently remains in Docker bridge mode. Do not change qBittorrent networking unless PeerBanHelper actually reports peer detection issues.
+
+## PeerBanHelper 实际流量验证
+
+验证日期：2026-07-14
+
+已使用合法的 Linux ISO Torrent 完成真实下载流量验证：
+
+- PeerBanHelper 成功连接 qBittorrent；
+- PeerBanHelper 能识别活动 Torrent；
+- PeerBanHelper 能读取活动 Peer；
+- 测试结束后，Torrent 和临时下载文件已清理；
+- qBittorrent 继续使用 Docker bridge 网络；
+- PeerBanHelper 继续使用 host 网络，并通过 `http://127.0.0.1:8080` 访问 qBittorrent。
+
+结论：当前网络结构无需调整。
