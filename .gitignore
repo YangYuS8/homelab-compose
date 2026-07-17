@@ -5,11 +5,15 @@
 *.secret
 secrets/
 
-# Runtime state at repository root
-/data/
-/config/
-/cache/
-/backups/
+# Runtime state directories
+data/
+config/
+cache/
+backups/
+
+# Public Glance configuration
+!stacks/glance/config/
+!stacks/glance/config/*.yml
 
 # Private and local snapshots
 private/
