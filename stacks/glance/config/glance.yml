@@ -1,0 +1,10 @@
+server:
+  assets-path: /app/assets
+
+branding:
+  app-name: "Homelab 控制台"
+  logo-text: "家"
+  hide-footer: true
+
+pages:
+  - $include: home.yml

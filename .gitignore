@@ -1,50 +1,30 @@
+# Environment files and secrets
 .env
 *.env
+!.env.example
 *.secret
 secrets/
-data/
-config/
-cache/
-backups/
+
+# Runtime state at repository root
+/data/
+/config/
+/cache/
+/backups/
+
+# Private and local snapshots
+private/
+_private/
+local/
+raw/
+raw-stacks/
+hosts/**/raw-stacks/
+
+*.raw.yml
+*.raw.yaml
+*.local.yml
+*.local.yaml
+*.bak
+
+# Logs and operating-system metadata
 *.log
 .DS_Store
-
-# Private/local snapshots
-private/
-_private/
-local/
-raw/
-raw-stacks/
-hosts/**/raw-stacks/
-*.raw.yml
-*.raw.yaml
-*.local.yml
-*.local.yaml
-*.bak
-
-# Secrets and real env files
-.env
-*.env
-!.env.example
-secrets/
-*.secret
-
-# Private/local snapshots
-private/
-_private/
-local/
-raw/
-raw-stacks/
-hosts/**/raw-stacks/
-*.raw.yml
-*.raw.yaml
-*.local.yml
-*.local.yaml
-*.bak
-
-# Secrets and real env files
-.env
-*.env
-!.env.example
-secrets/
-*.secret

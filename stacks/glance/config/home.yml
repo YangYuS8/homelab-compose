@@ -1,0 +1,175 @@
+- name: 家庭实验室
+  hide-desktop-navigation: true
+  columns:
+    - size: small
+      widgets:
+        - type: search
+          title: 搜索
+          search-engine: duckduckgo
+          new-tab: true
+          autofocus: true
+          placeholder: "搜索技术问题、项目、文档..."
+          bangs:
+            - title: GitHub
+              shortcut: "!gh"
+              url: "https://github.com/search?q={QUERY}"
+            - title: Docker Hub
+              shortcut: "!dh"
+              url: "https://hub.docker.com/search?q={QUERY}"
+            - title: Arch Wiki
+              shortcut: "!arch"
+              url: "https://wiki.archlinux.org/index.php?search={QUERY}"
+            - title: Debian Packages
+              shortcut: "!deb"
+              url: "https://packages.debian.org/search?keywords={QUERY}"
+
+        - type: monitor
+          title: 核心服务
+          cache: 1m
+          style: compact
+          sites:
+            - title: Dockge
+              url: http://192.168.3.30:5001
+            - title: Glance
+              url: http://192.168.3.30:3003
+            - title: qBittorrent
+              url: http://192.168.3.30:8080
+            - title: PeerBanHelper
+              url: http://192.168.3.30:9898
+
+        - type: monitor
+          title: 异常服务
+          cache: 1m
+          style: compact
+          show-failing-only: true
+          sites:
+            - title: Dockge
+              url: http://192.168.3.30:5001
+            - title: Glance
+              url: http://192.168.3.30:3003
+            - title: qBittorrent
+              url: http://192.168.3.30:8080
+            - title: ANI-RSS
+              url: http://192.168.3.30:7789
+            - title: Radarr
+              url: http://192.168.3.30:7878
+            - title: Prowlarr
+              url: http://192.168.3.30:9696
+              alt-status-codes:
+                - 401
+            - title: FlareSolverr
+              url: http://192.168.3.30:8191
+            - title: Jellyfin
+              url: http://192.168.3.30:8096
+            - title: Navidrome
+              url: http://192.168.3.30:4533
+            - title: Komga
+              url: http://192.168.3.30:25600
+            - title: Suwayomi
+              url: http://192.168.3.30:4567
+            - title: Komf
+              url: http://192.168.3.30:8085
+              alt-status-codes:
+                - 404
+            - title: PeerBanHelper
+              url: http://192.168.3.30:9898
+
+    - size: full
+      widgets:
+        - type: bookmarks
+          title: 服务入口
+          groups:
+            - title: 基础管理
+              same-tab: true
+              links:
+                - title: Dockge
+                  url: http://192.168.3.30:5001
+                  description: Compose 可视化管理
+                - title: Glance
+                  url: http://192.168.3.30:3003
+                  description: Homelab 起始页
+
+            - title: 下载与自动化
+              same-tab: true
+              links:
+                - title: qBittorrent
+                  url: http://192.168.3.30:8080
+                  description: 通用下载底座
+                - title: ANI-RSS
+                  url: http://192.168.3.30:7789
+                  description: 番剧 RSS 自动化
+                - title: Radarr
+                  url: http://192.168.3.30:7878
+                  description: 电影自动化
+                - title: Prowlarr
+                  url: http://192.168.3.30:9696
+                  description: 索引器管理
+                - title: FlareSolverr
+                  url: http://192.168.3.30:8191
+                  description: Cloudflare 挑战处理
+                - title: PeerBanHelper
+                  url: http://192.168.3.30:9898
+                  description: qBittorrent peer 管理
+
+            - title: 媒体库
+              same-tab: true
+              links:
+                - title: Jellyfin
+                  url: http://192.168.3.30:8096
+                  description: 番剧与电影
+                - title: Navidrome
+                  url: http://192.168.3.30:4533
+                  description: 音乐库
+
+            - title: 漫画
+              same-tab: true
+              links:
+                - title: Komga
+                  url: http://192.168.3.30:25600
+                  description: 漫画媒体库
+                - title: Suwayomi
+                  url: http://192.168.3.30:4567
+                  description: 漫画源与下载
+                - title: Komf
+                  url: http://192.168.3.30:8085
+                  description: Komga 元数据助手
+
+        - type: rss
+          title: 技术动态
+          limit: 12
+          collapse-after: 6
+          cache: 6h
+          feeds:
+            - url: https://selfh.st/rss/
+              title: selfh.st
+            - url: https://www.cncf.io/feed/
+              title: CNCF
+            - url: https://kubernetes.io/feed.xml
+              title: Kubernetes
+            - url: https://www.docker.com/blog/feed/
+              title: Docker Blog
+
+    - size: small
+      widgets:
+        - type: releases
+          title: 版本观察
+          cache: 1d
+          limit: 10
+          collapse-after: 6
+          show-source-icon: true
+          repositories:
+            - glanceapp/glance
+            - jellyfin/jellyfin
+            - navidrome/navidrome
+            - Radarr/Radarr
+            - Prowlarr/Prowlarr
+            - gotson/komga
+            - Suwayomi/Suwayomi-Server
+            - FlareSolverr/FlareSolverr
+            - ghostchu/PeerBanHelper
+
+        - type: repository
+          repository: YangYuS8/homelab-compose
+          pull-requests-limit: 3
+          issues-limit: 3
+          commits-limit: 5
